@@ -1,4 +1,6 @@
 class MenteesController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @mentee = current_company.mentees.new
   end
@@ -11,7 +13,7 @@ class MenteesController < ApplicationController
     @mentee = current_company.mentees.create(mentee_params)
 
     if @mentee.valid?
-      input_mentor_ids = params[:mentee][:mentor_ids].select(&:present?).map { |id| id.to_i }
+      input_mentor_ids = (params[:mentee][:mentor_ids] || []).select(&:present?).map { |id| id.to_i }
       input_mentor_ids.each do |id|
         @mentee.mentorships.where(user_id: id).create
       end
@@ -26,7 +28,7 @@ class MenteesController < ApplicationController
 
     if @mentee.update_attributes(mentee_params)
       current_mentor_ids = @mentee.mentors.pluck(:id)
-      input_mentor_ids = params[:mentee][:mentor_ids].select(&:present?).map { |id| id.to_i }
+      input_mentor_ids = (params[:mentee][:mentor_ids] || []).select(&:present?).map { |id| id.to_i }
 
       removed_mentor_ids = current_mentor_ids - input_mentor_ids
       new_mentor_ids = input_mentor_ids - current_mentor_ids

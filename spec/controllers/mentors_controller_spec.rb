@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe MentorsController, type: :controller do
-
-  describe "GET #new:get" do
-    it "returns http success" do
-      get :new:get
-      expect(response).to have_http_status(:success)
-    end
+  let(:company) { create(:company) }
+  let(:current_user) { create(:user, :admin, company: company) }
+  before do
+    sign_in current_user
   end
-
 end
