@@ -1,0 +1,5 @@
+= simple_form_for [current_mentee, @check_point] do |f|
+  = f.simple_fields_for :question do |question_form|
+    = question_form.input :name
+  = f.input :start_date
+  = f.button :submit

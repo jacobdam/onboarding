@@ -29,11 +29,11 @@ user = FactoryGirl.create(:user, :admin, email: 'user@email.com', company: nil)
   FactoryGirl.create_list(:user, MAX_EMPLOYEES - employee_count, company: company)
 
   mentee_count = Mentee.where(company: company).count
-  FactoryGirl.create_list(:mentee, MAX_MENTEES - mentee_count, company: company)
+  mentees = FactoryGirl.create_list(:mentee, MAX_MENTEES - mentee_count, company: company)
 
-  Mentee.all.each do |mentee|
+  mentees.each do |mentee|
     MAX_CHECK_POINTS.times do |i|
-      FactoryGirl.create(:check_point,mentee: mentee, start_date: Date.today + i * 7)
+      FactoryGirl.create(:check_point, mentee: mentee, start_date: Date.today + i * 7)
     end
   end
 end
