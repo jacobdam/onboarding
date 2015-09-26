@@ -12,6 +12,10 @@ class CheckPoint < ActiveRecord::Base
     state :finished
 
     event :start do
+      before do
+        touch(:started_at)
+      end
+
       transitions :from => :unstarted, :to => :started
     end
 
