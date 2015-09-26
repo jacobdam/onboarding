@@ -3,6 +3,7 @@
     th
       td Name
       td Email
+      td Role
       td Invitation
 
     - @mentors.each do |mentor|
@@ -10,6 +11,8 @@
         td= mentor.id
         td= mentor.full_name
         td= mentor.email
+        td
+          = mentor.is_admin? ? 'Admin' : 'Mentor'
         td
           - if mentor.invitation_token
             = "Invitation Sent"

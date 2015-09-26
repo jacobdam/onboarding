@@ -16,14 +16,8 @@ Company.destroy_all
 
 company_count = Company.count
 
-#password is 'password'
-user = FactoryGirl.create(:user, :admin, email: 'user@email.com', company: nil)
-
 (MAX_COMPANIES - company_count).times do
   company = FactoryGirl.create(:company)
-
-  user.update!(company: company) unless user.company
-
   employee_count = User.where(company: company).count
 
   FactoryGirl.create_list(:user, MAX_EMPLOYEES - employee_count, company: company)
@@ -37,3 +31,9 @@ user = FactoryGirl.create(:user, :admin, email: 'user@email.com', company: nil)
     end
   end
 end
+
+#password is 'password'
+admin = FactoryGirl.create(:user, :admin, email: 'user@email.com', company: Company.first)
+admin = FactoryGirl.create(:user, :admin, email: 'admin@email.com', company: Company.first)
+mentor_1 = FactoryGirl.create(:user, email: 'mentor1@email.com', company: Company.first)
+mentor_2 = FactoryGirl.create(:user, email: 'mentor2@email.com', company: Company.first)
