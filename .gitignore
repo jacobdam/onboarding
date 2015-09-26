@@ -17,3 +17,4 @@ config/database.yml
 /log/*
 !/log/.keep
 /tmp
+.idea
