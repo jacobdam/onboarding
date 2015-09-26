@@ -3,9 +3,15 @@
     th
       td Name
       td Email
+      td Invitation
 
     - @mentors.each do |mentor|
       tr
         td= mentor.id
         td= mentor.full_name
         td= mentor.email
+        td
+          - if mentor.invitation_token
+            = "Invitation Sent"
+          - else
+            = "Joined"
