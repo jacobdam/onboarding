@@ -12,10 +12,18 @@ MAX_QUESTIONS = 12
 MAX_CHECK_POINTS = 10
 MAX_MENTEES = 10
 
+Company.destroy_all
+
 company_count = Company.count
+
+#password is 'password'
+user = FactoryGirl.create(:user, email: 'user@email.com')
 
 (MAX_COMPANIES - company_count).times do
   company = FactoryGirl.create(:company)
+
+  user.update(company: company) unless user.company
+
   employee_count = User.where(company: company).count
   check_point_count = CheckPoint.where(company: company).count
 
