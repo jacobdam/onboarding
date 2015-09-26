@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :mentorship do
-    mentor nil
-mentee nil
+    user nil
+    mentee nil
   end
-
 end

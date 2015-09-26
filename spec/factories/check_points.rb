@@ -7,6 +7,15 @@ FactoryGirl.define do
     after(:create) do |cp|
       create(:question, check_point: cp)
     end
-  end
 
+    trait :started do
+      status 1
+    end
+
+    trait :answered do
+      after(:create) do |check_point|
+        answer = create(:answer, question: check_point.question)
+      end
+    end
+  end
 end
