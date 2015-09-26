@@ -1,4 +1,7 @@
 = simple_form_for @mentee do |f|
   = f.input :name
   = f.input :email
+  = f.association :mentors, collection: current_company.mentors.pluck(:full_name, :id), input_html: { class: 'chosen-select' }
   = f.submit
+javascript:
+  $(".chosen-select").chosen()

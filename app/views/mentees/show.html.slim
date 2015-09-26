@@ -2,3 +2,11 @@
   .id Mentee #{@mentee.id}
   .name Name: #{@mentee.name}
   .email Email: #{@mentee.email}
+
+  .mentors
+    .title Mentor
+    .list
+      - @mentee.mentors.each do |mentor|
+        li= mentor.email
+
+= link_to 'Mentee list', mentees_path
