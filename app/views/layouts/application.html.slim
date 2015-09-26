@@ -1,25 +1,72 @@
 doctype html
 html
   head
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    meta content="width=device-width, initial-scale=1" name="viewport" /
     title Onboarding
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    h1 Onboarding
-    
-    - if user_signed_in?
-      Hello #{current_user.full_name}
-      = link_to 'Sign out', destroy_user_session_path, method: :delete
-    - else
-      = link_to 'Sign up', new_user_registration_path
-      = link_to 'Sign in', new_user_session_path
+    .container
+      nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button" 
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand href="#"  Onboarding
+          #navbar.navbar-collapse.collapse
+            ul.nav.navbar-nav
+              li.active
+                a href="#"  Home
+              li
+                a href="#"  About
+              li
+                a href="#"  Contact
+              li.dropdown
+                a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                  | Dropdown
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a href="#"  Action
+                  li
+                    a href="#"  Another action
+                  li
+                    a href="#"  Something else here
+                  li.divider role="separator" 
+                  li.dropdown-header Nav header
+                  li
+                    a href="#"  Separated link
+                  li
+                    a href="#"  One more separated link
+            ul.nav.navbar-nav.navbar-right
+              li.active
+                a href="./" 
+                  | Default
+                  span.sr-only (current)
+              li
+                a href="../navbar-static-top/"  Static top
+              li
+                a href="../navbar-fixed-top/"  Fixed top
+          /! /.nav-collapse
+      main
+        - if user_signed_in?
+          Hello #{current_user.full_name}
+          = link_to 'Sign out', destroy_user_session_path, method: :delete
+        - else
+          = link_to 'Sign up', new_user_registration_path
+          = link_to 'Sign in', new_user_session_path
 
-    hr/
+        hr/
 
-    p.notice= notice
-    p.alert= alert
+        p.notice= notice
+        p.alert= alert
 
-    hr/
+        hr/
 
     = yield
