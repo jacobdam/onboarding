@@ -22,6 +22,7 @@ gem 'simple_form'
 # For generating seed data on production
 gem 'factory_girl_rails'
 gem 'faker'
+gem 'dalli', group: :production
 
 group :development, :test do
   gem 'byebug'
