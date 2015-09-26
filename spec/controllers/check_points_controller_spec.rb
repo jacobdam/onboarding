@@ -109,7 +109,7 @@ RSpec.describe CheckPointsController do
         expect(check_point.reload.question.name).to eq('Question A')
       end
 
-      it 'redirects to' do
+      it 'redirects to :index' do
         is_expected.to redirect_to(mentee_check_points_path)
       end
     end
@@ -129,7 +129,7 @@ RSpec.describe CheckPointsController do
         expect(assigns(:check_point)).to eq(check_point)
       end
 
-      it 'render :new template' do
+      it 'render :edit template' do
         is_expected.to render_template(:edit)
       end
     end
