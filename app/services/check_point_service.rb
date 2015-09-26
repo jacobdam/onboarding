@@ -13,7 +13,7 @@ class CheckPointService
   end
 
   def try_to_finish
-    finish! if next_check_point.should_have_started
+    finish! if next_check_point.should_have_started?
   end
 
   def next_check_point

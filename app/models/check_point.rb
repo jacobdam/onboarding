@@ -25,7 +25,7 @@ class CheckPoint < ActiveRecord::Base
 
   end
 
-  def should_have_started
+  def should_have_started?
     start_date <= Date.today
   end
 end
