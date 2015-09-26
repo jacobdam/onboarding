@@ -35,18 +35,15 @@ class CheckPointsController < ApplicationController
   end
 
   def finish
-    # TODO: move to service
-    check_point = current_mentee.check_points.find(params[:id])
-    next_check_point = current_mentee.check_points.unstarted.first
-
-    ActiveRecord::Base.transaction do
-      check_point.finish!
-      next_check_point.start! if next_check_point
-    end
+    CheckPointService.new(check_point).finish!
     redirect_to action: 'index'
   end
 
   private
+
+  def check_point
+    @check_point ||= current_mentee.check_points.find(params[:id])
+  end
 
   def current_mentee
     @current_mentee ||= Mentee.find(params[:mentee_id])
