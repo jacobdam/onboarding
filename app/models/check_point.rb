@@ -5,6 +5,7 @@ class CheckPoint < ActiveRecord::Base
   has_one :question, dependent: :destroy
   accepts_nested_attributes_for :question
   enum status: { unstarted: 0, started: 1, finished: 2 }
+  validates :start_date, presence: true
 
   aasm :status do
     state :unstarted, :initial => true

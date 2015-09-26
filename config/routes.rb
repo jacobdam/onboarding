@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :mentors, only: %i(index show)
 
   resources :mentees do
-    resources :check_points do
+    resources :check_points, except: %(show) do
       member do
         post :finish
       end

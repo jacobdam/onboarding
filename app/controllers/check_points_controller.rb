@@ -5,7 +5,7 @@ class CheckPointsController < ApplicationController
 
   def destroy
     current_mentee.check_points.find(params[:id]).destroy
-    redirect_to action: 'index'
+    redirect_to mentee_check_points_path(current_mentee), notice: 'Check point deleted'
   end
 
   def new
@@ -15,7 +15,7 @@ class CheckPointsController < ApplicationController
   def create
     @check_point = current_mentee.check_points.build(check_point_params)
     if @check_point.save
-      redirect_to action: 'index', notice: 'Check point created'
+      redirect_to mentee_check_points_path(current_mentee), notice: 'Check point created'
     else
       render action: 'new'
     end
@@ -28,7 +28,7 @@ class CheckPointsController < ApplicationController
   def update
     @check_point = current_mentee.check_points.find(params[:id])
     if @check_point.update(check_point_params)
-      redirect_to action: 'index', notice: 'Check point updated'
+      redirect_to mentee_check_points_path(current_mentee), notice: 'Check point updated'
     else
       render action: 'edit'
     end
@@ -36,7 +36,7 @@ class CheckPointsController < ApplicationController
 
   def finish
     CheckPointService.new(check_point).finish!
-    redirect_to action: 'index'
+    redirect_to mentee_check_points_path(current_mentee)
   end
 
   private
