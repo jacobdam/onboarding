@@ -14,8 +14,10 @@ nav.navbar.navbar-default
             li= link_to 'Dashboard', dashboard_path
         - else
           li.active= link_to 'Home', root_path
-        li
-          a href="#"  About
+
+        li= link_to 'Mentees', mentees_path
+        li= link_to 'Mentors', mentors_path
+
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           li.dropdown

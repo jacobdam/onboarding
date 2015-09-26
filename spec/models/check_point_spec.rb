@@ -51,7 +51,7 @@ RSpec.describe CheckPoint, type: :model do
       let(:start_date) { 2.days.ago.to_date }
 
       it 'returns true' do
-        expect(check_point.should_have_started).to be_truthy
+        expect(check_point.should_have_started?).to be_truthy
       end
     end
 
@@ -59,7 +59,7 @@ RSpec.describe CheckPoint, type: :model do
       let(:start_date) { 2.days.from_now.to_date }
 
       it 'returns false' do
-        expect(check_point.should_have_started).to be_falsey
+        expect(check_point.should_have_started?).to be_falsey
       end
     end
   end

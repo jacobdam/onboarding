@@ -5,11 +5,13 @@
       td Email
       td
       td
+      td
 
     - @mentees.each do |mentee|
       tr
         td= mentee.id
         td= link_to mentee.name, mentee
         td= mentee.email
+        td= link_to 'Check points', mentee_check_points_path(mentee)
         td= link_to 'Edit', edit_mentee_path(mentee)
         td= link_to 'Destroy', mentee_path(mentee), method: :delete

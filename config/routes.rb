@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :check_points, except: %(show) do
       member do
         post :finish
+        get :question
+        post :answer
       end
     end
   end

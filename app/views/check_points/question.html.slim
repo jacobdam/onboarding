@@ -1,0 +1,15 @@
+.question
+  p Question
+
+  = @question.name
+
+  = simple_form_for(@answer, url: answer_mentee_check_point_path) do |f|
+    = f.input :question_id, as: :hidden
+    = f.label 'Rating'
+    .button-group.answer-value-list(data-toggle="buttons")
+      = f.collection_radio_buttons :answer_value, (1..10).to_a, :to_i, :to_i do |value|
+        - value.label(class: 'btn btn-default') do
+          - concat value.radio_button
+          - concat value.value
+    = f.input :note, label: 'Comment', placeholder: 'Feel free to elaborate your answer'
+    = f.submit 'Submit your response', class: 'btn btn-primary'

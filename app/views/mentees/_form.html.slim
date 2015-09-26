@@ -2,6 +2,6 @@
   = f.input :name
   = f.input :email
   = f.association :mentors, collection: current_company.mentors.pluck(:full_name, :id), input_html: { class: 'chosen-select' }
-  = f.submit
+  = f.submit 'Save', class: 'btn btn-primary'
 javascript:
   $(".chosen-select").chosen()
