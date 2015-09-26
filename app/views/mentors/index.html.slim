@@ -1,0 +1,13 @@
+.mentor-list
+  table.table.table-striped
+    th
+      td Name
+      td Email
+
+    - @mentors.each do |mentor|
+      tr
+        td= mentor.id
+        td= mentor.full_name
+        td= mentor.email
+
+
