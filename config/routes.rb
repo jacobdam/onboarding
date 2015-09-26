@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :mentors, only: %i(index show)
 
   resources :mentees do
-    resources :check_points
+    resources :check_points do
+      member do
+        post :finish
+      end
+    end
   end
 end

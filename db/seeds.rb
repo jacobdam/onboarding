@@ -27,7 +27,8 @@ company_count = Company.count
 
   mentees.each do |mentee|
     MAX_CHECK_POINTS.times do |i|
-      FactoryGirl.create(:check_point, mentee: mentee, start_date: Date.today + i * 7)
+      check_point = FactoryGirl.create(:check_point, mentee: mentee, start_date: Date.today + i * 7)
+      check_point.start! if i == 0
     end
   end
 end

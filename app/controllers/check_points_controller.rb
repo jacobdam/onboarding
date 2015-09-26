@@ -1,6 +1,6 @@
 class CheckPointsController < ApplicationController
   def index
-    @check_points = current_mentee.check_points.order(start_date: :asc)
+    @check_points = current_mentee.check_points.includes(:question).order(start_date: :asc)
   end
 
   def destroy
@@ -32,6 +32,18 @@ class CheckPointsController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def finish
+    # TODO: move to service
+    check_point = current_mentee.check_points.find(params[:id])
+    next_check_point = current_mentee.check_points.unstarted.first
+
+    ActiveRecord::Base.transaction do
+      check_point.finish!
+      next_check_point.start! if next_check_point
+    end
+    redirect_to action: 'index'
   end
 
   private
