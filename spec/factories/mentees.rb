@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :mentee do
-    name "MyString"
-email "MyString"
-company nil
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    company
   end
 
 end

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :check_point do
-    started_at "2015-09-26 10:45:38"
+    started_at { Faker::Time.backward(14, :evening) }
   end
 
 end

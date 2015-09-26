@@ -1,7 +1,8 @@
 FactoryGirl.define do
-  factory :question do
-    question_template nil
-    check_point nil
+  factory :question_template do
+    name
+    worst_label "worst"
+    best_label "best"
   end
 
 end
