@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resource :company, only: %i{new create edit update}
   resource :dashboard, only: %i{show}
   resources :mentors, only: [:show, :index]
+  resources :mentees
 end
