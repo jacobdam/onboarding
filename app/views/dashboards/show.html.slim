@@ -1,2 +1,2 @@
-h1 Dashboard#show
-p Find me in app/views/dashboard/show.html.slim
+- current_company.mentees.each do |mentee|
+  .mentee= link_to mentee.name, mentee_check_points_path(mentee)

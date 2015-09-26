@@ -17,25 +17,23 @@ Company.destroy_all
 company_count = Company.count
 
 #password is 'password'
-user = FactoryGirl.create(:user, email: 'user@email.com')
+user = FactoryGirl.create(:user, :admin, email: 'user@email.com', company: nil)
 
 (MAX_COMPANIES - company_count).times do
   company = FactoryGirl.create(:company)
 
-  user.update(company: company) unless user.company
+  user.update!(company: company) unless user.company
 
   employee_count = User.where(company: company).count
-  check_point_count = CheckPoint.where(company: company).count
 
   FactoryGirl.create_list(:user, MAX_EMPLOYEES - employee_count, company: company)
 
-  (MAX_CHECK_POINTS - check_point_count).times do
-    check_point = FactoryGirl.create(:check_point, company: company)
-    question_count = Question.where(check_point: check_point).count
-
-    FactoryGirl.create_list(:question, MAX_QUESTIONS - question_count, check_point: check_point)
-  end
-
   mentee_count = Mentee.where(company: company).count
   FactoryGirl.create_list(:mentee, MAX_MENTEES - mentee_count, company: company)
+
+  Mentee.all.each do |mentee|
+    MAX_CHECK_POINTS.times do |i|
+      FactoryGirl.create(:check_point,mentee: mentee, start_date: Date.today + i * 7)
+    end
+  end
 end

@@ -1,4 +1,4 @@
 class CheckPoint < ActiveRecord::Base
-  belongs_to :company
-  has_many :questions, dependent: :destroy
+  belongs_to :mentee
+  has_one :question, dependent: :destroy
 end

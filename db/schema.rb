@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926044602) do
+ActiveRecord::Schema.define(version: 20150926070217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,11 @@ ActiveRecord::Schema.define(version: 20150926044602) do
 
   create_table "check_points", force: :cascade do |t|
     t.datetime "started_at"
-    t.integer  "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "mentee_id",  null: false
+    t.date     "start_date", null: false
   end
-
-  add_index "check_points", ["company_id"], name: "index_check_points_on_company_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -65,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150926044602) do
     t.integer  "check_point_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.text     "name",                 null: false
   end
 
   add_index "questions", ["check_point_id"], name: "index_questions_on_check_point_id", using: :btree
@@ -105,7 +105,6 @@ ActiveRecord::Schema.define(version: 20150926044602) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
-  add_foreign_key "check_points", "companies"
   add_foreign_key "mentees", "companies"
   add_foreign_key "questions", "check_points"
   add_foreign_key "questions", "question_templates"

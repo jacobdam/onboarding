@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :question do
-    question_template
     check_point
+    name { Faker::Lorem.sentence }
   end
 
 end
