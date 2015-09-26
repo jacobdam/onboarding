@@ -39,6 +39,27 @@ class CheckPointsController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def question
+    check_point = current_mentee.check_points.find(params[:id])
+    @question = check_point.question
+    @answer = Answer.new(
+      user_id: current_user.id,
+      question_id: @question.id
+    )
+  end
+
+  def answer
+    answer_params = params.require(:answer).permit(:question_id, :answer_value, :note)
+    answer_params.merge!(user_id: current_user.id)
+    @answer = Answer.create(answer_params)
+    if @answer.valid?
+      redirect_to dashboard_path
+    else
+      @question = Question.find(answer_params[:question_id])
+      render :question
+    end
+  end
+
   private
 
   def check_point

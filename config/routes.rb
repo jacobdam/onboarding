@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :check_points do
       member do
         post :finish
+        get :question
+        post :answer
       end
     end
   end

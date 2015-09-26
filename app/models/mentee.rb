@@ -6,4 +6,8 @@ class Mentee < ActiveRecord::Base
   validates :email, :name, presence: true
   validates :email, uniqueness: { scope: :company_id }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+
+  def current_check_point
+    check_points.where(status: CheckPoint.statuses[:started]).first
+  end
 end

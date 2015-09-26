@@ -3,6 +3,7 @@ class CheckPoint < ActiveRecord::Base
 
   belongs_to :mentee
   has_one :question, dependent: :destroy
+  has_one :answer, through: :question
   accepts_nested_attributes_for :question
   enum status: { unstarted: 0, started: 1, finished: 2 }
 
@@ -22,7 +23,6 @@ class CheckPoint < ActiveRecord::Base
     event :finish do
       transitions :from => :started, :to => :finished
     end
-
   end
 
   def should_have_started?
