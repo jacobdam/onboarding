@@ -1,0 +1,5 @@
+.container-fluid
+  = simple_form_for @mentor, url: mentors_path, html: { class: 'add-mentor-form' } do |f|
+    = f.input :email
+    = f.input :full_name
+    = f.submit 'Submit'
