@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
          :invitable
 
   belongs_to :company
+
+  scope :mentors, -> { where(is_admin: false) }
 end

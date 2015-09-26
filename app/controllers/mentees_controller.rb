@@ -11,6 +11,10 @@ class MenteesController < ApplicationController
     @mentee = current_company.mentees.create(mentee_params)
 
     if @mentee.valid?
+      input_mentor_ids = params[:mentee][:mentor_ids].select(&:present?).map { |id| id.to_i }
+      input_mentor_ids.each do |id|
+        @mentee.mentorships.where(user_id: id).create
+      end
       redirect_to @mentee
     else
       render :new
@@ -19,7 +23,19 @@ class MenteesController < ApplicationController
 
   def update
     @mentee = current_company.mentees.find(params[:id])
+
     if @mentee.update_attributes(mentee_params)
+      current_mentor_ids = @mentee.mentors.pluck(:id)
+      input_mentor_ids = params[:mentee][:mentor_ids].select(&:present?).map { |id| id.to_i }
+
+      removed_mentor_ids = current_mentor_ids - input_mentor_ids
+      new_mentor_ids = input_mentor_ids - current_mentor_ids
+
+      @mentee.mentorships.where(user_id: removed_mentor_ids).delete_all
+      new_mentor_ids.each do |id|
+        @mentee.mentorships.where(user_id: id).create
+      end
+
       redirect_to @mentee
     else
       render :edit

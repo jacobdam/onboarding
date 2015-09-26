@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926070217) do
+ActiveRecord::Schema.define(version: 20150926072113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 20150926070217) do
   end
 
   add_index "mentees", ["company_id"], name: "index_mentees_on_company_id", using: :btree
+
+  create_table "mentorships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "mentee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
+  add_index "mentorships", ["user_id"], name: "index_mentorships_on_user_id", using: :btree
 
   create_table "question_templates", force: :cascade do |t|
     t.text     "name"
@@ -106,6 +116,8 @@ ActiveRecord::Schema.define(version: 20150926070217) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "mentees", "companies"
+  add_foreign_key "mentorships", "mentees"
+  add_foreign_key "mentorships", "users"
   add_foreign_key "questions", "check_points"
   add_foreign_key "questions", "question_templates"
   add_foreign_key "users", "companies"
