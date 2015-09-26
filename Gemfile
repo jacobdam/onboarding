@@ -19,7 +19,7 @@ gem 'devise'
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
 end
