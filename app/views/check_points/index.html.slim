@@ -8,6 +8,9 @@ h2 Check points
       th Start Date
       th Status
       th
+      th
+      th
+      th
 
     - @check_points.each_with_index do |check_point, index|
       tr.check-point
@@ -19,6 +22,10 @@ h2 Check points
         td
         td
           = link_to 'Edit', edit_mentee_check_point_path(current_mentee, check_point)
+        td
           = link_to 'Delete', mentee_check_point_path(current_mentee, check_point), method: :delete, data: { confirm: 'Do you want to delete this check point?' }
+        td
+          = link_to 'Response', question_mentee_check_point_path(current_mentee, check_point)
+        td
           - if check_point.started?
             = link_to 'Finish', finish_mentee_check_point_path(current_mentee, check_point), method: :post

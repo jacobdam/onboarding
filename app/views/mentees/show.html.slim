@@ -9,4 +9,5 @@
       - @mentee.mentors.each do |mentor|
         li= mentor.email
 
-= link_to 'Mentee list', mentees_path
+  = link_to 'Edit', edit_mentee_path(@mentee), class: 'btn btn-primary'
+  = link_to 'View check points', mentee_check_points_path(@mentee), class: 'btn btn-success'
