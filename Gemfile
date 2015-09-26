@@ -19,11 +19,13 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'simple_form'
 
+# For generating seed data on production
+gem 'factory_girl_rails'
+gem 'faker'
+
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'faker'
   gem 'quiet_assets'
 end
 
