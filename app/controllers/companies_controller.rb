@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_no_company, only: %i{new create}
 
   def new
     @company = Company.new
@@ -32,5 +33,9 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name)
+  end
+
+  def ensure_no_company
+    redirect_to dashboard_path if current_company
   end
 end

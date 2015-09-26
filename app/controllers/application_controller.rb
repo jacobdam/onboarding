@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   def current_company
     current_user.company
   end
+  helper_method :current_company
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :full_name
