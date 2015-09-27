@@ -16,4 +16,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :full_name
     devise_parameter_sanitizer.for(:invite) << :full_name
   end
+
+  def authorize_admin!
+    unless current_user.is_admin?
+      flash[:error] = "You can not access this page"
+      redirect_to dashboard_path
+      false
+    end
+  end
 end
