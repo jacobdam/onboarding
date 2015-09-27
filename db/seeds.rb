@@ -25,11 +25,11 @@ company_count = Company.count
   mentees = FactoryGirl.create_list(:mentee, MAX_MENTEES - mentee_count, company: company)
 
   mentees.each do |mentee|
-    QuestionTemplate::QUESTIONS.each_with_index do |question_text, i|
-      check_point = FactoryGirl.create(:check_point, mentee: mentee, start_date: Date.today + i * 7, 
-        question: FactoryGirl.build(:question, name: question_text))
-      check_point.start! if i == 0
-    end
+    # QuestionTemplate::QUESTIONS.each_with_index do |question_text, i|
+    #   check_point = FactoryGirl.create(:check_point, mentee: mentee, start_date: Date.today + i * 7, 
+    #     question: FactoryGirl.build(:question, name: question_text))
+    #   check_point.start! if i == 0
+    # end
   end
 end
 
