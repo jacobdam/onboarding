@@ -1,5 +1,6 @@
-p.new-mentee-btn
-  = link_to 'Create new mentee', new_mentee_path, class: 'btn btn-primary'
+- if current_user.is_admin?
+  p.new-mentee-btn
+    = link_to 'Create new mentee', new_mentee_path, class: 'btn btn-primary'
 
 .mentor-list
   table.table.table-striped
@@ -18,5 +19,9 @@ p.new-mentee-btn
         td
           - if mentee.mentor_ids.include?(current_user.id)
             =link_to 'Check points', mentee_check_points_path(mentee), class: 'btn btn-success'
-        td= link_to 'Edit', edit_mentee_path(mentee), class: 'btn btn-primary'
-        td= link_to 'Destroy', mentee_path(mentee), method: :delete, class: 'btn btn-danger'
+        td
+          - if current_user.is_admin?
+            = link_to 'Edit', edit_mentee_path(mentee), class: 'btn btn-primary'
+        td
+          - if current_user.is_admin?
+            = link_to 'Destroy', mentee_path(mentee), method: :delete, class: 'btn btn-danger'

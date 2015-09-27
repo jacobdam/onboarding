@@ -1,12 +1,17 @@
 class MenteesController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_admin!, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @mentee = current_company.mentees.new
   end
 
   def index
-    @mentees = current_company.mentees
+    if current_user.is_admin?
+      @mentees = current_company.mentees
+    else
+      @mentees = current_user.mentees
+    end
   end
 
   def create
