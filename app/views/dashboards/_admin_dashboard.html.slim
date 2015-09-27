@@ -1,0 +1,6 @@
+= javascript_include_tag "//www.google.com/jsapi", "chartkick"
+
+- @presenter = Dashboard::AdminDashboard.new(current_user)
+h2.title Your company data
+
+= line_chart @presenter.data
