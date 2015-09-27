@@ -9,7 +9,7 @@ class DashboardsController < ApplicationController
     end.compact
 
     @answered_check_points = current_check_points.select do |check_point|
-      check_point.answer.present?
+      check_point.answers.present?
     end
 
     @unanswered_check_points = current_check_points - @answered_check_points

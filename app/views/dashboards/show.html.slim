@@ -39,5 +39,5 @@ ul
               = check_point.question.name
           td= check_point.start_date
           td
-            - if check_point.answer
-              = check_point.answer.answer_value
+            - if check_point.answers
+              = link_to 'View answers', mentee_path(check_point.mentee)
