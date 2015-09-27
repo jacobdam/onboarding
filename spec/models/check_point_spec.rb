@@ -78,4 +78,20 @@ RSpec.describe CheckPoint, type: :model do
       end
     end
   end
+
+  describe '#answer_of_mentor' do
+    let(:check_point) { create(:check_point) }
+    let(:question) { check_point.question }
+    let(:mentor) { create(:user) }
+    subject { check_point.answer_of_mentor(mentor) }
+
+    context 'when mentor answered check point question' do
+      let!(:answer) { create(:answer, question: question, user_id: mentor.id) }
+      it { is_expected.to eq answer }
+    end
+
+    context 'when mentor did not answered check point question' do
+      it { is_expected.to eq nil }
+    end
+  end
 end

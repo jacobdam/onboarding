@@ -33,4 +33,8 @@ class CheckPoint < ActiveRecord::Base
   def should_have_started?
     start_date <= Date.today
   end
+
+  def answer_of_mentor(mentor)
+    answers.where(user_id: mentor.id).first
+  end
 end
