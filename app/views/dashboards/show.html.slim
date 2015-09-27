@@ -1,5 +1,5 @@
 .description
-  p You have #{@unanswered_check_points.count} unanswered check points left.
+  p You have #{@presenter.unanswered_check_points.count} unanswered check points left.
 
 ul
   .check-point-list
@@ -10,17 +10,15 @@ ul
         th Start Date
         th
 
-      - @unanswered_check_points.each_with_index do |check_point, index|
+      - @presenter.unanswered_check_points.each_with_index do |check_point, index|
         tr.check-point
           td= index + 1
-          td
-            - if check_point.question
-              = check_point.question.name
+          td= check_point.question_name
           td= check_point.start_date
           td= link_to 'Evaluate mentee', question_mentee_check_point_path(check_point.mentee, check_point)
 
 .description
-  p You have finished #{@answered_check_points.count} check points.
+  p You have finished #{@presenter.answered_check_points.count} check points.
 
 ul
   .check-point-list
@@ -29,15 +27,14 @@ ul
         th #
         th Question
         th Start Date
-        th Answer
+        th Your answer
 
-      - @answered_check_points.each_with_index do |check_point, index|
+      - @presenter.answered_check_points.each_with_index do |check_point, index|
         tr.check-point
           td= index + 1
-          td
-            - if check_point.question
-              = check_point.question.name
+          td= check_point.question_name
           td= check_point.start_date
           td
-            - if check_point.answers
-              = link_to 'View answers', mentee_path(check_point.mentee)
+            = "#{check_point.answer} ("
+            = link_to 'View all answers', mentee_path(check_point.mentee)
+            = ")"
