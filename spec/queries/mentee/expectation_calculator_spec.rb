@@ -57,7 +57,7 @@ describe Mentee::ExpectationCalculator do
     let!(:answer_1) { create(:answer, question: question_1, answer_value: value_1) }
     let!(:answer_2) { create(:answer, question: question_1, answer_value: value_2) }
     let!(:answer_3) { create(:answer, question: question_2, answer_value: value_3) }
-    let(:result) { [[start_date_1.to_date, 1], [start_date_2.to_date, 0]] }
+    let(:result) { [[start_date_2.to_date, 0], [start_date_1.to_date, 1]] }
     subject { query.competence_index_progress_data }
     it { is_expected.to eq result }
   end
@@ -75,7 +75,7 @@ describe Mentee::ExpectationCalculator do
     let!(:answer_1) { create(:answer, question: question_1, answer_value: value_1) }
     let!(:answer_2) { create(:answer, question: question_1, answer_value: value_2) }
     let!(:answer_3) { create(:answer, question: question_2, answer_value: value_3) }
-    let(:result) { [[start_date_1.to_date, 8], [start_date_2.to_date, 7]] }
+    let(:result) { [[start_date_2.to_date, 7], [start_date_1.to_date, 8]] }
     subject { query.average_expectation_progress_data }
     it { is_expected.to eq result }
   end

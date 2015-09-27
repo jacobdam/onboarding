@@ -1,4 +1,6 @@
 class Mentee < ActiveRecord::Base
+  attr_accessor :skip_prepopulate_check_points
+  
   belongs_to :company
   has_many :check_points, ->{ order(start_date: 'asc') }, dependent: :destroy
   has_many :mentorships, dependent: :destroy
@@ -8,7 +10,7 @@ class Mentee < ActiveRecord::Base
   validates :email, uniqueness: { scope: :company_id }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
-  after_create :prepopulate_check_points
+  after_create :prepopulate_check_points, unless: :skip_prepopulate_check_points
 
   def current_check_point
     check_points.where(status: CheckPoint.statuses[:started]).first
