@@ -26,13 +26,13 @@ gem 'chartkick'
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'dalli', group: :production
-gem 'coveralls', require: false
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'quiet_assets'
   gem 'shoulda-matchers'
+  gem "codeclimate-test-reporter", group: :test, require: nil
 end
 
 group :development do
