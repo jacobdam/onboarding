@@ -1,26 +1,40 @@
 = javascript_include_tag "//www.google.com/jsapi", "chartkick"
 
 .mentee
-  .id Mentee #{@presenter.id}
-  .name Name: #{@presenter.name}
-  .email Email: #{@presenter.email}
+  h1.id Mentee ##{@presenter.id}
+  .name
+    span.label.label-default Name:
+    span.content  #{@presenter.name}
+  .email
+    span.label.label-default Email:
+    span.content  #{@presenter.email}
 
-  .mentors
-    .title Mentor
+  p.mentors
+    h3.title Mentor
     .list
       - @presenter.mentors.each do |mentor|
         li= mentor.email
 
-  = link_to 'Edit', edit_mentee_path(@presenter.mentee), class: 'btn btn-primary'
-  = link_to 'View check points', mentee_check_points_path(@presenter.mentee), class: 'btn btn-success'
+  p.buttons
+    = link_to 'Edit', edit_mentee_path(@presenter.mentee), class: 'btn btn-primary'
+    = link_to 'View check points', mentee_check_points_path(@presenter.mentee), class: 'btn btn-success'
 
-  .summary
-    p Competent index #{@presenter.competence_index}
-    p Average expectation #{@presenter.average_expectation}
+  p.summary
+    p.competence
+      - if @presenter.good_competence?
+        .label.label-success Competent index #{@presenter.competence_index}
+      - elsif @presenter.normal_competence?
+        .label.label-primary Competent index #{@presenter.competence_index}
+      - else
+        .label.label-danger Competent index #{@presenter.competence_index}
+    p.expectaction
+      - if @presenter.good_competence?
+        .label.label-success Average expectation #{@presenter.average_expectation}
+      - else
+        .label.label-danger Average expectation #{@presenter.average_expectation}
 
-    p Break down the result:
-
+    h3 Break down the result:
     = column_chart(@presenter.current_check_point_data)
 
-    p Mentee progress
+    h3 Mentee progress
     = line_chart(@presenter.progress_data)

@@ -11,7 +11,7 @@ class Mentee::ShowMentee
   end
 
   def progress_data
-    [
+    @progress_data ||= [
       {
         name: 'Competence Index',
         data: calculator.competence_index_progress_data
@@ -22,6 +22,18 @@ class Mentee::ShowMentee
         data: calculator.average_expectation_progress_data
       }
     ]
+  end
+
+  def good_competence?
+    competence_index > 1
+  end
+
+  def normal_competence?
+    competence_index >= 0
+  end
+
+  def good_expectation?
+    average_expectation >= 7
   end
 
   private

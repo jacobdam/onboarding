@@ -6,15 +6,15 @@ class Mentee::ExpectationCalculator
   end
 
   def competence_index
-    competence_index_by_check_point(current_check_point)
+    @competence_index ||= competence_index_by_check_point(current_check_point)
   end
 
   def average_expectation
-    average_expectation_by_check_point(current_check_point)
+    @average_expectation ||= average_expectation_by_check_point(current_check_point)
   end
 
   def current_check_point_data
-    current_check_point.answers.group(:answer_value).count
+    @current_check_point_data ||= current_check_point.answers.group(:answer_value).count
   end
 
   def competence_index_progress_data
