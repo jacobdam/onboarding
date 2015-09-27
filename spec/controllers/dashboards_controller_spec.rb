@@ -7,31 +7,19 @@ RSpec.describe DashboardsController do
     end
 
     context 'created company' do
-      let(:mentee) { current_user.mentees.first }
-      let(:current_user) { create(:user, :mentor_with_mentee, company: create(:company)) }
+      let(:current_user) { create(:user, company: create(:company)) }
 
-      context 'when there is answered check point' do
-        let!(:answered_check_point) { create(:check_point, :answered, :started, mentee: mentee) }
+      let(:answered_check_points) { [] }
+      let(:unanswered_check_points) { [] }
+      let(:presenter) { instance_double('Dashboard::ShowDashboard',
+                                        answered_check_points: answered_check_points,
+                                        unanswered_check_points: unanswered_check_points) }
 
-        it 'renders dashboard template' do
-          get :show
-          is_expected.to render_template(:show)
-
-          expect(assigns[:answered_check_points]).to eq [answered_check_point]
-          expect(assigns[:unanswered_check_points]).to eq []
-        end
-      end
-
-      context 'when there is unanswered check point' do
-        let!(:unanswered_check_point) { create(:check_point, :started, mentee: mentee) }
-
-        it 'renders dashboard template' do
-          get :show
-          is_expected.to render_template(:show)
-
-          expect(assigns[:answered_check_points]).to eq []
-          expect(assigns[:unanswered_check_points]).to eq [unanswered_check_point]
-        end
+      it 'renders dashboard' do
+        expect(Dashboard::ShowDashboard).to receive(:new)
+          .with(current_user).and_return(presenter)
+        get :show
+        expect(assigns[:presenter]).to eq presenter
       end
     end
 
