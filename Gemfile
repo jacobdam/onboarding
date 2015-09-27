@@ -20,6 +20,8 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'simple_form'
 
+gem 'chartkick'
+
 # For generating seed data on production
 gem 'factory_girl_rails'
 gem 'faker'

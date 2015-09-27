@@ -3,5 +3,4 @@ FactoryGirl.define do
     question { Faker::Lorem.sentence }
     answer_value 1
   end
-
 end

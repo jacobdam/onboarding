@@ -42,7 +42,7 @@ RSpec.describe CheckPointsController do
       it 'creates answer' do
         expect {
           post :answer, answer: answer_params, id: check_point.id, mentee_id: mentee.id
-        }.to change { question.reload.answer }.from(nil)
+        }.to change { question.reload.answers.count }.by(1)
 
         expect(assigns[:answer].note).to eq note
         expect(assigns[:answer].question_id).to eq question.id
@@ -57,7 +57,7 @@ RSpec.describe CheckPointsController do
       it 'renders error' do
         expect {
           post :answer, answer: answer_params, id: check_point.id, mentee_id: mentee.id
-        }.not_to change { question.reload.answer }
+        }.not_to change { question.reload.answers.count }
 
         expect(response).to render_template(:question)
         expect(assigns[:question]).to eq question

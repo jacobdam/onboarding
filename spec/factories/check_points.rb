@@ -9,7 +9,13 @@ FactoryGirl.define do
     end
 
     trait :started do
+      start_date 1.days.ago
       status 1
+    end
+
+    trait :finished do
+      start_date 10.days.ago
+      status 2
     end
 
     trait :answered do

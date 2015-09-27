@@ -4,6 +4,21 @@ RSpec.describe CheckPoint, type: :model do
   it { is_expected.to belong_to(:mentee) }
   it { is_expected.to have_one(:question) }
 
+  describe '.past_and_current' do
+    let!(:check_point) { create(:check_point, start_date: start_date) }
+    subject { described_class.past_and_current.pluck(:id) }
+
+    context 'when start date is in the past' do
+      let(:start_date) { 2.days.ago }
+      it { is_expected.to eq [check_point.id] }
+    end
+
+    context 'when start date is in the future' do
+      let(:start_date) { 2.days.from_now }
+      it { is_expected.to eq [] }
+    end
+  end
+
   describe 'states' do
     subject { create(:check_point) }
 

@@ -1,13 +1,26 @@
+= javascript_include_tag "//www.google.com/jsapi", "chartkick"
+
 .mentee
-  .id Mentee #{@mentee.id}
-  .name Name: #{@mentee.name}
-  .email Email: #{@mentee.email}
+  .id Mentee #{@presenter.id}
+  .name Name: #{@presenter.name}
+  .email Email: #{@presenter.email}
 
   .mentors
     .title Mentor
     .list
-      - @mentee.mentors.each do |mentor|
+      - @presenter.mentors.each do |mentor|
         li= mentor.email
 
-  = link_to 'Edit', edit_mentee_path(@mentee), class: 'btn btn-primary'
-  = link_to 'View check points', mentee_check_points_path(@mentee), class: 'btn btn-success'
+  = link_to 'Edit', edit_mentee_path(@presenter.mentee), class: 'btn btn-primary'
+  = link_to 'View check points', mentee_check_points_path(@presenter.mentee), class: 'btn btn-success'
+
+  .summary
+    p Competent index #{@presenter.competence_index}
+    p Average expectation #{@presenter.average_expectation}
+
+    p Break down the result:
+
+    = column_chart(@presenter.current_check_point_data)
+
+    p Mentee progress
+    = line_chart(@presenter.progress_data)

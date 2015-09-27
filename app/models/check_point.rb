@@ -3,9 +3,13 @@ class CheckPoint < ActiveRecord::Base
 
   belongs_to :mentee
   has_one :question, dependent: :destroy
-  has_one :answer, through: :question
+  has_many :answers, through: :question
+
   accepts_nested_attributes_for :question
   enum status: { unstarted: 0, started: 1, finished: 2 }
+
+  scope :past_and_current, -> { where('start_date <= ?', Date.today) }
+
   validates :start_date, presence: true
 
   aasm :status do

@@ -55,7 +55,8 @@ class MenteesController < ApplicationController
   end
 
   def show
-    @mentee = current_company.mentees.find(params[:id])
+    mentee = current_company.mentees.find(params[:id])
+    @presenter = Mentee::ShowMentee.new(mentee)
   end
 
   private
