@@ -8,7 +8,6 @@
 
 MAX_COMPANIES = 3
 MAX_EMPLOYEES = 5
-MAX_QUESTIONS = 12
 MAX_CHECK_POINTS = 10
 MAX_MENTEES = 10
 
@@ -26,8 +25,9 @@ company_count = Company.count
   mentees = FactoryGirl.create_list(:mentee, MAX_MENTEES - mentee_count, company: company)
 
   mentees.each do |mentee|
-    MAX_CHECK_POINTS.times do |i|
-      check_point = FactoryGirl.create(:check_point, mentee: mentee, start_date: Date.today + i * 7)
+    QuestionTemplate::QUESTIONS.each_with_index do |question_text, i|
+      check_point = FactoryGirl.create(:check_point, mentee: mentee, start_date: Date.today + i * 7, 
+        question: FactoryGirl.build(:question, name: question_text))
       check_point.start! if i == 0
     end
   end

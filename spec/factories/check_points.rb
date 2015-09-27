@@ -5,7 +5,7 @@ FactoryGirl.define do
     mentee
 
     after(:create) do |cp|
-      create(:question, check_point: cp)
+      create(:question, check_point: cp) unless cp.question
     end
 
     trait :started do

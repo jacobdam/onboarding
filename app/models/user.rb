@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :invitable
 
+  self.invite_key_fields << :full_name
+
   belongs_to :company
   has_many :mentorships, dependent: :destroy
   has_many :mentees, through: :mentorships

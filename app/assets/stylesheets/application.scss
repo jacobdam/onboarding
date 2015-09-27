@@ -16,3 +16,9 @@
 @import "bootstrap";
 @import "lib/chosen.min";
 @import "check_points";
+
+td {
+  .btn + .btn {
+    margin-left: 10px;
+  }
+}
