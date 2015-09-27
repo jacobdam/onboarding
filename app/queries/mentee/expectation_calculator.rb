@@ -14,7 +14,7 @@ class Mentee::ExpectationCalculator
   end
 
   def current_check_point_data
-    answers.group(:answer_value).count
+    current_check_point.answers.group(:answer_value).count
   end
 
   def competence_index_progress_data
@@ -32,12 +32,11 @@ class Mentee::ExpectationCalculator
   private
 
   delegate :current_check_point, to: :mentee
-  delegate :answers, to: :current_check_point
 
   def average_expectation_by_check_point(check_point)
     if check_point.answers.count > 0
-      total_point = answers.pluck(:answer_value).sum
-      total_point / answers.count
+      total_point = check_point.answers.pluck(:answer_value).sum
+      total_point / check_point.answers.count
     else
       0
     end
