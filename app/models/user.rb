@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :company
   has_many :mentorships, dependent: :destroy
   has_many :mentees, through: :mentorships
+  has_many :answers, dependent: :destroy
 
   scope :mentors, -> { where(is_admin: false) }
 end
